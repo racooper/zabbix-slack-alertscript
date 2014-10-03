@@ -14,11 +14,13 @@ channel='#alerts'
 token="$1"
 subject="$2"
 
-# Change message emoji depending on the subject - smile (RECOVERY), frowning (PROBLEM), or ghost (for everything else)
-if [ "$subject" == 'RECOVERY' ]; then
-	emoji=':smile:'
-elif [ "$subject" == 'PROBLEM' ]; then
-	emoji=':frowning:'
+status=`echo $subject | awk -F ":" '{print $1}'`
+
+# Change message emoji depending on the subject - star2 (RECOVERY), boom (PROBLEM), or ghost (for everything else)
+if [ "$status" == 'OK' ]; then
+	emoji=':star2:'
+elif [ "$status" == 'PROBLEM' ]; then
+	emoji=':boom:'
 else
 	emoji=':ghost:'
 fi
